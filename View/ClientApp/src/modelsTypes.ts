@@ -1,17 +1,7 @@
 ﻿export type PersonType = {
     personId: number
     login: string
-    password: string
     roleId: number
-
-    role: RoleType
-}
-
-export type RoleType = {
-    roleId: number
-    name: string
-
-    persons: Array<PersonType>
 }
 
 export type ProductTypeType = {
@@ -30,3 +20,5 @@ export type ProductType = {
     productTypeId: number
     type: ProductTypeType
 }
+
+export type ModelType = PersonType  | ProductTypeType | ProductType

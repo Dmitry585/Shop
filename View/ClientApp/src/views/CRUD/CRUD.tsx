@@ -1,8 +1,10 @@
 ﻿import * as React from "react";
 import { Grid } from '@material-ui/core';
-import { Route } from "react-router";
+import { Route, Switch, Redirect } from 'react-router';
 import CrudMenu from "../../components/menu-f/CrudMenu/CrudMenu";
-import CrudPage from "../../components/crud-f/CrudPage";
+import CrudUser from "../../components/crud-f/CrudUser";
+import CrudTypes from "../../components/crud-f/CrudTypes";
+import CrudProducts from "../../components/crud-f/CrudProducts";
 
 class CRUD extends React.PureComponent {
 
@@ -14,7 +16,11 @@ class CRUD extends React.PureComponent {
                         <Route path="/crud/:table?" component={CrudMenu} />
                     </Grid>
                     <Grid item xs={12} sm={9} md={10}>
-                        <Route path="/crud/:table?" component={CrudPage} />
+                        <Switch>
+                            <Route path="/crud/Типы продуктов" component={CrudTypes} />
+                            <Route path="/crud/Продукты" component={CrudProducts} />
+                            <Route path="/crud" component={CrudUser} />
+                        </Switch>
                     </Grid>
                 </Grid>
             </div>

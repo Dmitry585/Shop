@@ -2,11 +2,14 @@ import { IAuthState } from "./auth/types";
 import { authReducer } from "./auth/reducers";
 import { ProductState } from "./products/types";
 import { productsReducer } from "./products/reducers";
+import { usersReducer } from "./users/reducers";
+import { UsersState } from "./users/types";
 
 // The top-level state object
 export interface ApplicationState {
     auth: IAuthState,
-    products: ProductState
+    products: ProductState,
+    user: UsersState
 }
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are
@@ -21,6 +24,7 @@ export interface AppThunkAction<TAction> {
 // acts on the corresponding ApplicationState property type.
 export const reducers = {
     auth: authReducer,
-    products: productsReducer
+    products: productsReducer,
+    user: usersReducer
 };
 

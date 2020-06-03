@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-    <TypeScriptToolsVersion>3.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.8</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
     <SpaRoot>ClientApp\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
@@ -33,6 +33,7 @@
     <None Remove="ClientApp\src\api\auth.ts" />
     <None Remove="ClientApp\src\api\product.ts" />
     <None Remove="ClientApp\src\api\productType.ts" />
+    <None Remove="ClientApp\src\api\users.ts" />
     <None Remove="ClientApp\src\App.tsx" />
     <None Remove="ClientApp\src\components\auth-f\authModalTypes.ts" />
     <None Remove="ClientApp\src\components\auth-f\Login.js" />
@@ -57,6 +58,10 @@
     <None Remove="ClientApp\src\store\auth\reducers.ts" />
     <None Remove="ClientApp\src\store\auth\types.ts" />
     <None Remove="ClientApp\src\store\configureStore.ts" />
+    <None Remove="ClientApp\src\store\users\actions.ts" />
+    <None Remove="ClientApp\src\store\users\reducers.ts" />
+    <None Remove="ClientApp\src\store\users\selectors.ts" />
+    <None Remove="ClientApp\src\store\users\types.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -65,6 +70,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\api\users.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\api\product.ts" />
     <TypeScriptCompile Include="ClientApp\src\api\productType.ts" />
     <TypeScriptCompile Include="ClientApp\src\axiosOptions.ts" />
@@ -100,6 +108,18 @@
     <TypeScriptCompile Include="ClientApp\src\store\auth\reducers.ts" />
     <TypeScriptCompile Include="ClientApp\src\store\auth\types.ts" />
     <TypeScriptCompile Include="ClientApp\src\store\configureStore.ts" />
+    <TypeScriptCompile Include="ClientApp\src\store\users\actions.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\users\reducers.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\users\selectors.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\users\types.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
