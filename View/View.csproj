@@ -1,0 +1,147 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>3.7</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\axiosOptions.ts" />
+    <None Remove="ClientApp\src\api\auth.ts" />
+    <None Remove="ClientApp\src\api\product.ts" />
+    <None Remove="ClientApp\src\api\productType.ts" />
+    <None Remove="ClientApp\src\App.tsx" />
+    <None Remove="ClientApp\src\components\auth-f\authModalTypes.ts" />
+    <None Remove="ClientApp\src\components\auth-f\Login.js" />
+    <None Remove="ClientApp\src\components\auth-f\Login.js.map" />
+    <None Remove="ClientApp\src\components\auth-f\LoginModal.tsx" />
+    <None Remove="ClientApp\src\components\auth-f\Register.js" />
+    <None Remove="ClientApp\src\components\auth-f\Register.js.map" />
+    <None Remove="ClientApp\src\components\auth-f\RegisterModal.tsx" />
+    <None Remove="ClientApp\src\components\auth-f\selectors.ts" />
+    <None Remove="ClientApp\src\components\menu-f\CrudMenu\CrudMenu.tsx" />
+    <None Remove="ClientApp\src\components\menu-f\Footer.tsx" />
+    <None Remove="ClientApp\src\components\menu-f\Footer\Footer.tsx" />
+    <None Remove="ClientApp\src\components\menu-f\ProductsMenu\ProductsMenu.tsx" />
+    <None Remove="ClientApp\src\components\products-f\ProductItem.tsx" />
+    <None Remove="ClientApp\src\components\products-f\ProductsList.tsx" />
+    <None Remove="ClientApp\src\modelsTypes.ts" />
+    <None Remove="ClientApp\src\store\products\actions.ts" />
+    <None Remove="ClientApp\src\store\products\reducers.ts" />
+    <None Remove="ClientApp\src\store\products\selectors.ts" />
+    <None Remove="ClientApp\src\store\products\types.ts" />
+    <None Remove="ClientApp\src\store\auth\actions.ts" />
+    <None Remove="ClientApp\src\store\auth\reducers.ts" />
+    <None Remove="ClientApp\src\store\auth\types.ts" />
+    <None Remove="ClientApp\src\store\configureStore.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EntityDatabase\EntityDatabase.csproj" />
+    <ProjectReference Include="..\Model\Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\api\product.ts" />
+    <TypeScriptCompile Include="ClientApp\src\api\productType.ts" />
+    <TypeScriptCompile Include="ClientApp\src\axiosOptions.ts" />
+    <TypeScriptCompile Include="ClientApp\src\api\auth.ts" />
+    <TypeScriptCompile Include="ClientApp\src\App.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\auth-f\authModalTypes.ts" />
+    <TypeScriptCompile Include="ClientApp\src\components\auth-f\LoginModal.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\auth-f\RegisterModal.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\components\menu-f\CrudMenu\CrudMenu.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\components\menu-f\ProductsMenu\ProductsMenu.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\products-f\ProductItem.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\products-f\ProductsList.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\store\products\actions.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\products\reducers.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\products\selectors.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\products\types.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\auth\selectors.ts" />
+    <TypeScriptCompile Include="ClientApp\src\components\menu-f\Footer\Footer.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\modelsTypes.ts" />
+    <TypeScriptCompile Include="ClientApp\src\store\auth\actions.ts" />
+    <TypeScriptCompile Include="ClientApp\src\store\auth\reducers.ts" />
+    <TypeScriptCompile Include="ClientApp\src\store\auth\types.ts" />
+    <TypeScriptCompile Include="ClientApp\src\store\configureStore.ts" />
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)build\**; $(SpaRoot)build-ssr\**" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES2019</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>ES6</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>False</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,16 @@
+﻿.brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+.left_mar {
+    margin-left: 10px;
+}
+
+@media (max-width: 575px){
+    .left_mar {
+        margin-left: 0px;
+        margin-top:5px;
+    }
+}
