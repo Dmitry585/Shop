@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from 'react-router';
 import CrudMenu from "../../components/menu-f/CrudMenu/CrudMenu";
 import CrudUser from "../../components/crud-f/CrudUser";
 import CrudTypes from "../../components/crud-f/CrudTypes";
+import CrudTables from "../../components/crud-f/CrudTables";
 import CrudProducts from "../../components/crud-f/CrudProducts";
 
 class CRUD extends React.PureComponent {
@@ -19,6 +20,7 @@ class CRUD extends React.PureComponent {
                         <Switch>
                             <Route path="/crud/Типы продуктов" component={CrudTypes} />
                             <Route path="/crud/Продукты" component={CrudProducts} />
+                            <Route path="/crud/Столы" component={CrudTables} />
                             <Route path="/crud" component={CrudUser} />
                         </Switch>
                     </Grid>

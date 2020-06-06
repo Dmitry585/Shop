@@ -1,12 +1,14 @@
 ﻿import { SignInActionType, SignOutActionType, SIGN_IN, SIGN_OUT, REGISTER, RegisterActionType, LoadMenuActionType, MenuType, LOAD_MENU } from "./types";
 import auth_api from "../../api/auth";
+
 import { AppThunkAction, ApplicationState } from "../index";
 import Rezerved from "../../views/rezerved-f/Rezerved";
 import Home from "../../views/home-f/Home";
 import CRUD from "../../views/CRUD/CRUD";
+import RezervedList from "../../views/rezerved-f/RezervedList";
 
 
-const signInAction = (token:string,role:string): SignInActionType => {
+const signInAction = (token: string, role: string): SignInActionType => {
     return {
         type: SIGN_IN,
         token: token,
@@ -67,7 +69,7 @@ export const register = (login: string, password: string): AppThunkAction<Regist
 }
 
 export const signOut = (): AppThunkAction<SignOutActionType | LoadMenuActionType> => {
-    return (dispatch,getState) => {
+    return async (dispatch, getState) => {
         localStorage.removeItem("token")
         localStorage.removeItem("role")
         dispatch(signOutAction())
@@ -77,7 +79,7 @@ export const signOut = (): AppThunkAction<SignOutActionType | LoadMenuActionType
 
 
 export const loadMenu = (): AppThunkAction<LoadMenuActionType> => {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
         var menu = getMenu(getState())
         dispatch(loadMenuAction(menu))
     }
@@ -92,11 +94,18 @@ function getMenu(state: ApplicationState) {
 
     switch (state.auth.role) {
         case "Администратор": {
-            dumpRoute = dumpRoute.concat([{
-                path: "/crud",
-                component: CRUD,
-                name: "Управление данными"
-            }])
+            dumpRoute = dumpRoute.concat([
+                {
+                    path: "/crud",
+                    component: CRUD,
+                    name: "Управление данными"
+                },
+                {
+                    path: "/rezervedList",
+                    component: RezervedList,
+                    name: "Заказы"
+                }
+            ])
             break;
         }
         case "Пользователь": {

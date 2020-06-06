@@ -32,7 +32,6 @@ export function usersReducer(state = initialState, action: UserActionType): User
                 }
                 return true
             })
-            console.log(users)
             return {
                 users: users
             }

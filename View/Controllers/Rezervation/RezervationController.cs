@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EntityDatabase.Data;
+using EntityDatabase.Data.Modifications;
 using EntityDatabase.Data.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.Models;
+using Rezervat = Model.Models.Rezervation;
 
 namespace View.Controllers.Rezervation
 {
@@ -22,35 +24,19 @@ namespace View.Controllers.Rezervation
         }
         // GET: api/Rezervation
         [HttpGet]
-        public IEnumerable<Model.Models.Rezervation> Get()
+        public IEnumerable<Rezervat> Get()
         {
             var rr = new RezervationRepository(_context);
-            return rr.GetTodayRezervation();
-        }
-
-        // GET: api/Rezervation/5
-        [HttpGet("{id}", Name = "GetRezervation")]
-        public string Get(int id)
-        {
-            return "value";
+            return rr.GetRezervation();
         }
 
         // POST: api/Rezervation
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<bool> Post([FromBody] Rezervat rezervation)
         {
-        }
-
-        // PUT: api/Rezervation/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var rm = new RezervationModification(_context);
+            _ =await rm.CreateRezervation(rezervation);
+            return true;
         }
     }
 }

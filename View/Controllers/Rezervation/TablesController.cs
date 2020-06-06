@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EntityDatabase.Data;
+using EntityDatabase.Data.Modifications;
 using EntityDatabase.Data.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,29 +29,33 @@ namespace View.Controllers.Rezervation
             return tr.GetTables();
         }
 
-        // GET: api/Tables/5
-        [HttpGet("{id}", Name = "GetTables")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST: api/Tables
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<Table> Post([FromForm] Table table)
         {
+            var tm = new TableModification(_context);
+            var result = await tm.CreateTable(table);
+            return result;
         }
 
         // PUT: api/Tables/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<Table> Put(int id, [FromForm] Table table)
         {
+            var tm = new TableModification(_context);
+            var result = await tm.EditTable(id, table);
+            return result;
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var tr = new TableRepository(_context);
+            var table = tr.GetTableById(id);
+            var tm = new TableModification(_context);
+            tm.DeleteTable(table);
         }
     }
 }

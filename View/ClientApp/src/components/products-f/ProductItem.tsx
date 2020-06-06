@@ -1,19 +1,34 @@
 ﻿import * as React from "react";
 import { createStyles, Theme, withStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardHeader, CardMedia, CardContent, Typography, Box, CardActions, Button } from '@material-ui/core';
+import { AlertProps } from "@material-ui/lab/Alert";
 
 import { ProductType } from "../../modelsTypes";
+import { addItemInOrder } from "../../store/orders/actions";
 
+import { ConnectedProps, connect } from "react-redux";
+import { setSnackbar } from "../../store/snackBar/actions";
+
+const mapDispatch = {
+    addItem: (item: ProductType) => addItemInOrder(item),
+    openSnack: (text: string, severite?: string) => setSnackbar(text, severite),
+}
+
+const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
 
 type ProductItemOwnProps = {
     item: ProductType
 }
 
+
+
 const useStyles = ({ }: Theme) => createStyles({
     root: {
         flexDirection: "column",
-        maxWidth: 345,
-        display: "flex"
+        width: 345,
+        display: "flex",
     },
     media: {
         height: 0,
@@ -23,11 +38,12 @@ const useStyles = ({ }: Theme) => createStyles({
         display: "flex",
     },
     grow: {
-        flexGrow: 1
+        flexGrow: 1,
+        flexShrink:1
     },
     fullContent: {
         flex: "1"
-    }
+    },
 
 }
 )
@@ -42,11 +58,9 @@ type ProductItemStylePropsType = {
     }
 }
 
-type ProductItemPropsType = ProductItemOwnProps & ProductItemStylePropsType
+type ProductItemPropsType = ProductItemOwnProps & ProductItemStylePropsType & PropsFromRedux
 
 class ProductsItem extends React.PureComponent<ProductItemPropsType, {}> {
-
-
     public render() {
         return (
             <Grid className={this.props.classes.flex} item>
@@ -74,11 +88,23 @@ class ProductsItem extends React.PureComponent<ProductItemPropsType, {}> {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button disabled={this.props.item.count == 0} fullWidth size="small" color="primary">Купить</Button>
+                        <Button onClick={()=> this.addItem(this.props.item) } disabled={this.props.item.count == 0} fullWidth size="small" color="primary">Купить</Button>
                     </CardActions>
                 </Card>
             </Grid>
         )
     }
+
+    private  addItem = async (item: ProductType) => {
+        var result = await this.props.addItem(item);
+        if ((result as unknown as boolean)) {
+            this.props.openSnack("Товар добавлен")
+        }
+        else {
+            this.props.openSnack("Вы достигли лимит товара","error")
+
+        }
+        console.log(result)
+    }
 }
-export default withStyles(useStyles)(ProductsItem)
+export default connector(withStyles(useStyles)(ProductsItem))

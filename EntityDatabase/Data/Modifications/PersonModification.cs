@@ -33,8 +33,7 @@ namespace EntityDatabase.Data.Modifications
                 Person person = pr.GetPersonById(id);
                 if (person != null)
                 {
-                    person.Login = newPerson.Login;
-                    person.RoleId = newPerson.RoleId;
+                    person = newPerson;
                     await _context.SaveChangesAsync();
                     return person;
                 }
@@ -48,6 +47,7 @@ namespace EntityDatabase.Data.Modifications
             try
             {
                 _context.Persons.Remove(person);
+                _context.SaveChanges();
                 return true;
             }
             catch(Exception e)

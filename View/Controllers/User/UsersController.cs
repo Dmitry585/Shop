@@ -31,15 +31,6 @@ namespace View.Controllers.User
             return result;
         }
 
-        // POST api/Users
-        [HttpPost]
-        public async Task<Person> Post(Person person)
-        {
-            var prm = new PersonModification(_context);
-            var result = await prm.CreatePerson(person);
-            return result;
-        }
-
         // PUT api/Users/5
         [HttpPut("{id}")]
         public async Task<Person> Put(int id, [FromForm]Person person)

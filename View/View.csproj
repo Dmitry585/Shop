@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFrameworkCore.Triggers" Version="1.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
@@ -33,6 +34,8 @@
     <None Remove="ClientApp\src\api\auth.ts" />
     <None Remove="ClientApp\src\api\product.ts" />
     <None Remove="ClientApp\src\api\productType.ts" />
+    <None Remove="ClientApp\src\api\rezervation.ts" />
+    <None Remove="ClientApp\src\api\table.ts" />
     <None Remove="ClientApp\src\api\users.ts" />
     <None Remove="ClientApp\src\App.tsx" />
     <None Remove="ClientApp\src\components\auth-f\authModalTypes.ts" />
@@ -50,6 +53,18 @@
     <None Remove="ClientApp\src\components\products-f\ProductItem.tsx" />
     <None Remove="ClientApp\src\components\products-f\ProductsList.tsx" />
     <None Remove="ClientApp\src\modelsTypes.ts" />
+    <None Remove="ClientApp\src\store\snackBar\actions.ts" />
+    <None Remove="ClientApp\src\store\snackBar\reducers.ts" />
+    <None Remove="ClientApp\src\store\snackBar\selectors.ts" />
+    <None Remove="ClientApp\src\store\snackBar\types.ts" />
+    <None Remove="ClientApp\src\store\table\actions.ts" />
+    <None Remove="ClientApp\src\store\table\reducers.ts" />
+    <None Remove="ClientApp\src\store\table\selectors.ts" />
+    <None Remove="ClientApp\src\store\table\types.ts" />
+    <None Remove="ClientApp\src\store\productType\actions.ts" />
+    <None Remove="ClientApp\src\store\productType\reducers.ts" />
+    <None Remove="ClientApp\src\store\productType\selectors.ts" />
+    <None Remove="ClientApp\src\store\productType\types.ts" />
     <None Remove="ClientApp\src\store\products\actions.ts" />
     <None Remove="ClientApp\src\store\products\reducers.ts" />
     <None Remove="ClientApp\src\store\products\selectors.ts" />
@@ -58,6 +73,10 @@
     <None Remove="ClientApp\src\store\auth\reducers.ts" />
     <None Remove="ClientApp\src\store\auth\types.ts" />
     <None Remove="ClientApp\src\store\configureStore.ts" />
+    <None Remove="ClientApp\src\store\orders\actions.ts" />
+    <None Remove="ClientApp\src\store\orders\reducers.ts" />
+    <None Remove="ClientApp\src\store\orders\selectors.ts" />
+    <None Remove="ClientApp\src\store\orders\types.ts" />
     <None Remove="ClientApp\src\store\users\actions.ts" />
     <None Remove="ClientApp\src\store\users\reducers.ts" />
     <None Remove="ClientApp\src\store\users\selectors.ts" />
@@ -70,6 +89,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\api\rezervation.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\api\table.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\api\users.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -89,6 +114,42 @@
     <TypeScriptCompile Include="ClientApp\src\components\menu-f\ProductsMenu\ProductsMenu.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\products-f\ProductItem.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\products-f\ProductsList.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\store\snackBar\actions.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\snackBar\reducers.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\snackBar\selectors.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\snackBar\types.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\table\actions.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\table\reducers.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\table\selectors.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\table\types.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\productType\actions.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\productType\reducers.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\productType\selectors.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\productType\types.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\store\products\actions.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -108,6 +169,18 @@
     <TypeScriptCompile Include="ClientApp\src\store\auth\reducers.ts" />
     <TypeScriptCompile Include="ClientApp\src\store\auth\types.ts" />
     <TypeScriptCompile Include="ClientApp\src\store\configureStore.ts" />
+    <TypeScriptCompile Include="ClientApp\src\store\orders\actions.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\orders\reducers.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\orders\selectors.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\store\orders\types.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\store\users\actions.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

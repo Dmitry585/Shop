@@ -43,8 +43,8 @@ class LoginModal extends React.PureComponent<LoginPropsType, AuthModalStateType>
                         Авторизация
                     </DialogTitle>
                     <DialogContent>
-                        <TextField autoFocus fullWidth margin="dense" onChange={this.loginChangeHandler} defaultValue={this.state.login}  label="Логин" />
-                        <TextField autoFocus fullWidth margin="dense" onChange={this.passwordChangeHandler} defaultValue={this.state.password} type="password" label="Пароль" />
+                        <TextField autoFocus fullWidth margin="dense" onChange={this.loginChangeHandler} defaultValue={this.state.login} label="Логин" />
+                        <TextField fullWidth margin="dense" onChange={this.passwordChangeHandler} defaultValue={this.state.password} type="password" label="Пароль" />
                     </DialogContent>
                     <DialogActions>
                         <Button color="primary" onClick={this.login}>Войти</Button>

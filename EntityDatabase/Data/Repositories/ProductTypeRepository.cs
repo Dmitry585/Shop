@@ -22,5 +22,11 @@ namespace EntityDatabase.Data.Repositories
             }).ToList();
             return result;
         }
+
+        public ProductType GetProductTypeById(int id)
+        {
+            var result = base.StartCondition().FirstOrDefault(x => x.ProductTypeId == id);
+            return result;
+        }
     }
 }

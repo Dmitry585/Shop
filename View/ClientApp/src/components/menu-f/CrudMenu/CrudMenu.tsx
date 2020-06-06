@@ -12,7 +12,6 @@ type CrudMenuMenuType = {
 
 
 type CrudMenuStateType = {
-    selected: string
     items: Array<CrudMenuMenuType>
 }
 
@@ -37,8 +36,7 @@ type CrudMenuPropsType = PropsFromRedux
 
 class CrudMenu extends React.PureComponent<CrudMenuPropsType, CrudMenuStateType> {
     public state = {
-        selected: "",
-        items: [{ name: "Пользователи", id: "" }, { name: "Типы продуктов", id: "Типы продуктов" }, { name: "Продукты", id: "Продукты"}]
+        items: [{ name: "Пользователи", id: "" }, { name: "Типы продуктов", id: "Типы продуктов" }, { name: "Продукты", id: "Продукты" }, { name: "Столы", id: "Столы" }]
     }
 
     public async componentDidMount() {
@@ -52,7 +50,7 @@ class CrudMenu extends React.PureComponent<CrudMenuPropsType, CrudMenuStateType>
                 {
                     this.state.items.map(item => {
                         return (
-                            <MenuItem component={Link} to={`/crud/${item.id}`} selected={item.id === this.state.selected} onClick={this.selectHandler(item.id)} key={item.id}>
+                            <MenuItem component={Link} to={`/crud/${item.id}`} selected={item.id === (this.props.table != undefined ? this.props.table : "")} key={item.id}>
                                 {item.name}
                             </MenuItem>)
                     }
@@ -60,12 +58,6 @@ class CrudMenu extends React.PureComponent<CrudMenuPropsType, CrudMenuStateType>
                 }
             </MenuList>
         )
-    }
-
-    public selectHandler = (newSelected: string) => () => {
-        this.setState({
-            selected: newSelected
-        })
     }
 
 
