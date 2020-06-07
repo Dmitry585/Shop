@@ -1,17 +1,7 @@
 ﻿export type PersonType = {
     personId: number
     login: string
-    password: string
     roleId: number
-
-    role: RoleType
-}
-
-export type RoleType = {
-    roleId: number
-    name: string
-
-    persons: Array<PersonType>
 }
 
 export type ProductTypeType = {
@@ -22,11 +12,34 @@ export type ProductTypeType = {
 export type ProductType = {
     productId: number
     name: string
-    price: number
+    price: string
     count: number
     image: string
     about: string
 
     productTypeId: number
-    type: ProductTypeType
 }
+
+export type OrderItemType = {
+    id: number
+    product: ProductType
+    productId:number
+    count:number
+}
+
+
+export type TableType = {
+    tableId: number
+    maxPerson: number
+}
+
+export type RezervationType = {
+    rezervationId?: number
+    rezervationDate: Date
+    personName:string
+    items: Array<OrderItemType>
+
+    tableId: number
+}
+
+export type ModelType = PersonType | ProductTypeType | ProductType | TableType | OrderItemType

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using EntityDatabase.Data;
 using View.Options;
+using EntityFrameworkCore.Triggers;
 
 namespace View
 {
@@ -61,9 +62,7 @@ namespace View
             });
 
             string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<ApplicationContext>(options =>
-                options.UseSqlServer(connection));
-
+            services.AddDbContext<ApplicationContext>(options =>options.UseSqlServer(connection));
             services.AddControllersWithViews();
         }
 

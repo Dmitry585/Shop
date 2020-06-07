@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityDatabase.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20200528104041_AddOrders")]
-    partial class AddOrders
+    [Migration("20200604161727_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,22 +20,6 @@ namespace EntityDatabase.Migrations
                 .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Model.Models.Order", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("PointsXml")
-                        .HasColumnName("Items")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("OrderId");
-
-                    b.ToTable("Orders");
-                });
 
             modelBuilder.Entity("Model.Models.Person", b =>
                 {
@@ -68,7 +52,7 @@ namespace EntityDatabase.Migrations
                         {
                             PersonId = 1,
                             Login = "admin",
-                            Password = "AQAAAAEAACcQAAAAEMm9jJfNA0btshEu1KVTtlrw4aWxZ4VY/4d1aGJ6ELmeLGfUVzAgcJuIt2hcpWi2aA==",
+                            Password = "AQAAAAEAACcQAAAAEPV1YJvT3lY/9S2pUwRMxv1IHwUrwbWcjQ+IfaWAKD2diUOPFV9uOnEuo15gKBX+Qw==",
                             RoleId = 1
                         });
                 });
@@ -236,6 +220,10 @@ namespace EntityDatabase.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("OrderXml")
+                        .HasColumnName("Items")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PersonsCount")
                         .HasColumnType("int");
 
@@ -255,30 +243,27 @@ namespace EntityDatabase.Migrations
                         new
                         {
                             RezervationId = 1,
+                            OrderXml = @"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfOrd xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <Ord>
+    <Id>1</Id>
+    <ProductId>1</ProductId>
+    <Count>1</Count>
+  </Ord>
+  <Ord>
+    <Id>2</Id>
+    <ProductId>2</ProductId>
+    <Count>2</Count>
+  </Ord>
+  <Ord>
+    <Id>3</Id>
+    <ProductId>3</ProductId>
+    <Count>3</Count>
+  </Ord>
+</ArrayOfOrd>",
                             PersonsCount = 2,
                             RezervationDate = new DateTime(2020, 5, 25, 12, 30, 0, 0, DateTimeKind.Unspecified),
                             TableId = 1
-                        },
-                        new
-                        {
-                            RezervationId = 2,
-                            PersonsCount = 4,
-                            RezervationDate = new DateTime(2020, 5, 25, 14, 30, 0, 0, DateTimeKind.Unspecified),
-                            TableId = 1
-                        },
-                        new
-                        {
-                            RezervationId = 3,
-                            PersonsCount = 2,
-                            RezervationDate = new DateTime(2020, 5, 25, 12, 30, 0, 0, DateTimeKind.Unspecified),
-                            TableId = 2
-                        },
-                        new
-                        {
-                            RezervationId = 4,
-                            PersonsCount = 4,
-                            RezervationDate = new DateTime(2020, 5, 25, 14, 30, 0, 0, DateTimeKind.Unspecified),
-                            TableId = 2
                         });
                 });
 

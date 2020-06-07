@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EntityDatabase.Data;
+using EntityDatabase.Data.Modifications;
 using EntityDatabase.Data.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,29 +29,32 @@ namespace View.Controllers.Shop
             return ptr.GetAllProductTypes();
         }
 
-        // GET: api/ProductTypes/5
-        [HttpGet("{id}", Name = "GetProductType")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST: api/ProductTypes
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ProductType> Post([FromForm] ProductType productType)
         {
+            var ptm = new ProductTypeModification(_context);
+            var result = await ptm.CreateProductType(productType);
+            return result;
         }
 
         // PUT: api/ProductTypes/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ProductType> Put(int id, [FromForm] ProductType productType)
         {
+            var ptm = new ProductTypeModification(_context);
+            var result = await ptm.EditProductType(id,productType);
+            return result;
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var ptr = new ProductTypeRepository(_context);
+            var productType = ptr.GetProductTypeById(id);
+            var ptm = new ProductTypeModification(_context);
+            ptm.DeleteProductType(productType);
         }
     }
 }

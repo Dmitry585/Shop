@@ -46,38 +46,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\ApplicationContext.cs" />
+    <Compile Include="Data\Modifications\BaseModification.cs" />
+    <Compile Include="Data\Modifications\PersonModification.cs" />
+    <Compile Include="Data\Modifications\ProductModification.cs" />
+    <Compile Include="Data\Modifications\ProductTypeModification.cs" />
+    <Compile Include="Data\Modifications\RezervationModification.cs" />
+    <Compile Include="Data\Modifications\TableModification.cs" />
     <Compile Include="Data\Repositories\BaseRepository.cs" />
-    <Compile Include="Data\Repositories\RezervationRepository.cs" />
-    <Compile Include="Data\Repositories\TableRepositiry.cs" />
     <Compile Include="Data\Repositories\PersonRepository.cs" />
     <Compile Include="Data\Repositories\ProductRepository.cs" />
     <Compile Include="Data\Repositories\ProductTypeRepository.cs" />
+    <Compile Include="Data\Repositories\RezervationRepository.cs" />
     <Compile Include="Data\Repositories\RoleRepository.cs" />
-    <Compile Include="Data\Modifications\BaseModification.cs" />
-    <Compile Include="Data\Modifications\PersonModification.cs" />
-    <Compile Include="Migrations\20200523155225_Init.cs" />
-    <Compile Include="Migrations\20200523155225_Init.designer.cs">
-      <DependentUpon>20200523155225_Init.cs</DependentUpon>
+    <Compile Include="Data\Repositories\TableRepositiry.cs" />
+    <Compile Include="Migrations\20200604161727_Init.cs" />
+    <Compile Include="Migrations\20200604161727_Init.designer.cs">
+      <DependentUpon>20200604161727_Init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20200525103237_ChangeData.cs" />
-    <Compile Include="Migrations\20200525103237_ChangeData.designer.cs">
-      <DependentUpon>20200525103237_ChangeData.cs</DependentUpon>
+    <Compile Include="Migrations\20200605192335_ChangeRezervation.cs" />
+    <Compile Include="Migrations\20200605192335_ChangeRezervation.designer.cs">
+      <DependentUpon>20200605192335_ChangeRezervation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20200525162731_CreateRezervationAndTable.cs" />
-    <Compile Include="Migrations\20200525162731_CreateRezervationAndTable.designer.cs">
-      <DependentUpon>20200525162731_CreateRezervationAndTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20200528104041_AddOrders.cs" />
-    <Compile Include="Migrations\20200528104041_AddOrders.designer.cs">
-      <DependentUpon>20200528104041_AddOrders.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20200528104525_AddOrdersFactory.cs" />
-    <Compile Include="Migrations\20200528104525_AddOrdersFactory.designer.cs">
-      <DependentUpon>20200528104525_AddOrdersFactory.cs</DependentUpon>
+    <Compile Include="Migrations\20200606112304_CreateTriggers.cs" />
+    <Compile Include="Migrations\20200606112304_CreateTriggers.designer.cs">
+      <DependentUpon>20200606112304_CreateTriggers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="EntityFrameworkCore.Triggers, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFrameworkCore.Triggers.1.2.2\lib\net461\EntityFrameworkCore.Triggers.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>

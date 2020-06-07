@@ -5,7 +5,10 @@ import { ConnectedRouter } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import configureStore from './store/configureStore';
 import App from './App';
+import DateFns from '@date-io/date-fns';
+import ruLocale from "date-fns/locale/ru";
 import registerServiceWorker from './registerServiceWorker';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 // Create browser history to use in the Redux store
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href') as string;
@@ -16,8 +19,10 @@ const store = configureStore(history);
 
 ReactDOM.render(
     <Provider store={store}>
-        <ConnectedRouter history={history}>
-            <App />
+        <ConnectedRouter history={history} >
+            <MuiPickersUtilsProvider utils={DateFns} locale={ruLocale}>
+                <App />
+            </MuiPickersUtilsProvider>
         </ConnectedRouter>
     </Provider>,
     document.getElementById('root'));

@@ -17,5 +17,11 @@ namespace EntityDatabase.Data.Repositories
             var result = StartCondition().Include(product => product.Type).OrderByDescending(x=>x.Count).ToList();
             return result;
         }
+
+        public Product GetProductById(int id)
+        {
+            var result = base.StartCondition().FirstOrDefault(x => x.ProductId == id);
+            return result;
+        }
     }
 }

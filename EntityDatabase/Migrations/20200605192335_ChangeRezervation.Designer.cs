@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityDatabase.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20200528104525_AddOrdersFactory")]
-    partial class AddOrdersFactory
+    [Migration("20200605192335_ChangeRezervation")]
+    partial class ChangeRezervation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,46 +20,6 @@ namespace EntityDatabase.Migrations
                 .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Model.Models.Order", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("PointsXml")
-                        .HasColumnName("Items")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("OrderId");
-
-                    b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            OrderId = 1,
-                            PointsXml = @"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfOrd xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <Ord>
-    <Id>1</Id>
-    <ProductId>1</ProductId>
-    <Count>1</Count>
-  </Ord>
-  <Ord>
-    <Id>2</Id>
-    <ProductId>2</ProductId>
-    <Count>2</Count>
-  </Ord>
-  <Ord>
-    <Id>3</Id>
-    <ProductId>3</ProductId>
-    <Count>3</Count>
-  </Ord>
-</ArrayOfOrd>"
-                        });
-                });
 
             modelBuilder.Entity("Model.Models.Person", b =>
                 {
@@ -92,7 +52,7 @@ namespace EntityDatabase.Migrations
                         {
                             PersonId = 1,
                             Login = "admin",
-                            Password = "AQAAAAEAACcQAAAAEOuia1cVflOV5HgFcjuxHQ61K0RePE55lDIbbdw6dEHWfXF7KG7m4vG47cc1J6X5/Q==",
+                            Password = "AQAAAAEAACcQAAAAELdMjgxY833cPnfqnNskF5qv2buzS7jFr0qU6KfmIci0vP6TYPW1NQmW9zxjzHnBRw==",
                             RoleId = 1
                         });
                 });
@@ -260,13 +220,17 @@ namespace EntityDatabase.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("PersonsCount")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderXml")
+                        .HasColumnName("Items")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("RezervationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TableId")
+                    b.Property<int?>("TableId")
                         .HasColumnType("int");
 
                     b.HasKey("RezervationId");
@@ -279,30 +243,27 @@ namespace EntityDatabase.Migrations
                         new
                         {
                             RezervationId = 1,
-                            PersonsCount = 2,
+                            OrderXml = @"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfOrd xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <Ord>
+    <Id>1</Id>
+    <ProductId>1</ProductId>
+    <Count>1</Count>
+  </Ord>
+  <Ord>
+    <Id>2</Id>
+    <ProductId>2</ProductId>
+    <Count>2</Count>
+  </Ord>
+  <Ord>
+    <Id>3</Id>
+    <ProductId>3</ProductId>
+    <Count>3</Count>
+  </Ord>
+</ArrayOfOrd>",
+                            PersonName = "Тест",
                             RezervationDate = new DateTime(2020, 5, 25, 12, 30, 0, 0, DateTimeKind.Unspecified),
                             TableId = 1
-                        },
-                        new
-                        {
-                            RezervationId = 2,
-                            PersonsCount = 4,
-                            RezervationDate = new DateTime(2020, 5, 25, 14, 30, 0, 0, DateTimeKind.Unspecified),
-                            TableId = 1
-                        },
-                        new
-                        {
-                            RezervationId = 3,
-                            PersonsCount = 2,
-                            RezervationDate = new DateTime(2020, 5, 25, 12, 30, 0, 0, DateTimeKind.Unspecified),
-                            TableId = 2
-                        },
-                        new
-                        {
-                            RezervationId = 4,
-                            PersonsCount = 4,
-                            RezervationDate = new DateTime(2020, 5, 25, 14, 30, 0, 0, DateTimeKind.Unspecified),
-                            TableId = 2
                         });
                 });
 
@@ -382,9 +343,7 @@ namespace EntityDatabase.Migrations
                 {
                     b.HasOne("Model.Models.Table", "Table")
                         .WithMany()
-                        .HasForeignKey("TableId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TableId");
                 });
 #pragma warning restore 612, 618
         }

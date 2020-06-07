@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EntityDatabase.Data;
+using EntityDatabase.Data.Modifications;
 using EntityDatabase.Data.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,29 +30,32 @@ namespace View.Controllers.Shop
             return result;
         }
 
-        // GET: api/Product/5
-        [HttpGet("{id}", Name = "GetProduct")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST: api/Product
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<Product> Post([FromForm] Product product)
         {
+            var prm = new ProductModification(_context);
+            var result = await prm.CreateProduct(product);
+            return result;
         }
 
         // PUT: api/Product/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<Product> Put(int id, [FromForm] Product product)
         {
+            var prm = new ProductModification(_context);
+            var result = await prm.EditProduct(id,product);
+            return result;
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var pr = new ProductRepository(_context);
+            var product = pr.GetProductById(id);
+            var prm = new ProductModification(_context);
+            prm.DeleteProduct(product);
         }
     }
 }

@@ -1,8 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EntityDatabase.Data.Modifications;
+using EntityDatabase.Data.Repositories;
+using EntityFrameworkCore.Triggers;
+using Microsoft.EntityFrameworkCore;
 using Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace EntityDatabase.Data
 {
@@ -21,47 +26,9 @@ namespace EntityDatabase.Data
                 .HasIndex(p => new { p.Login })
                 .IsUnique(true);
 
-            modelBuilder.Entity<Table>().HasData(
-                new Table
-                {
-                    TableId = 1,
-                    MaxPerson = 5
-                },
-                new Table
-                {
-                    TableId = 2,
-                    MaxPerson = 4
-                });
-
-            modelBuilder.Entity<Rezervation>().HasData(
-                new Rezervation
-                {
-                    RezervationId = 1,
-                    TableId = 1,
-                    PersonsCount = 2,
-                    RezervationDate = DateTime.ParseExact("25.05.2020 12:30", "dd.MM.yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
-                },
-                new Rezervation
-                {
-                    RezervationId = 2,
-                    TableId = 1,
-                    PersonsCount = 4,
-                    RezervationDate = DateTime.ParseExact("25.05.2020 14:30", "dd.MM.yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
-                },
-                new Rezervation
-                {
-                    RezervationId = 3,
-                    TableId = 2,
-                    PersonsCount = 2,
-                    RezervationDate = DateTime.ParseExact("25.05.2020 12:30", "dd.MM.yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
-                },
-                new Rezervation
-                {
-                    RezervationId = 4,
-                    TableId = 2,
-                    PersonsCount = 4,
-                    RezervationDate = DateTime.ParseExact("25.05.2020 14:30", "dd.MM.yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
-                });
+            modelBuilder.Entity<Rezervation>()
+                .HasIndex(r => new { r.RezervationDate })
+                .IsUnique(true);
 
             modelBuilder.Entity<Role>().HasData(
                 new Role
@@ -197,39 +164,51 @@ namespace EntityDatabase.Data
                     About = "Вино́ — алкогольный напиток (крепость: натуральных — 9—16 % об., креплёных — 16—22 % об.), получаемый полным или частичным спиртовым брожением виноградного сока..."
                 }
             );
-            var ord = new Order
-            {
-                OrderId = 1,
-                Items = new List<Ord>()
+            modelBuilder.Entity<Table>().HasData(
+                new Table
                 {
-                    new Ord
+                    TableId = 1,
+                    MaxPerson = 5
+                },
+                new Table
+                {
+                    TableId = 2,
+                    MaxPerson = 4
+                });
+            modelBuilder.Entity<Rezervation>().HasData(
+                new Rezervation
+                {
+                    RezervationId = 1,
+                    TableId = 1,
+                    PersonName = "Тест",
+                    Items = new List<Ord>()
                     {
-                        Id = 1,
-                        ProductId = 1,
-                        Count =1
+                        new Ord
+                        {
+                            Id = 1,
+                            ProductId = 1,
+                            Count =1
+                        },
+                        new Ord
+                        {
+                            Id = 2,
+                            ProductId = 2,
+                            Count =2
+                        },
+                        new Ord
+                        {
+                            Id = 3,
+                            ProductId = 3,
+                            Count =3
+                        }
                     },
-                    new Ord
-                    {
-                        Id = 2,
-                        ProductId = 2,
-                        Count =2
-                    },
-                    new Ord
-                    {
-                        Id = 3,
-                        ProductId = 3,
-                        Count =3
-                    }
+                    RezervationDate = DateTime.ParseExact("25.05.2020 12:30", "dd.MM.yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
                 }
-            };
-            modelBuilder.Entity<Order>().HasData(
-                ord
-                );
+            );
         }
 
 
         public DbSet<Person> Persons { get; set; }
-        public DbSet<Order> Orders { get; set; }
         public DbSet<Rezervation> Rezervations { get; set; }
         public DbSet<Table> Tables { get; set; }
         public DbSet<Role> Roles { get; set; }

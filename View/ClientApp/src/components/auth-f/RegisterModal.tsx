@@ -37,8 +37,8 @@ class RegisterModal extends React.PureComponent<RegisterPropsType, RegisterState
                     </DialogTitle>
                     <DialogContent>
                         <TextField autoFocus fullWidth margin="dense" onChange={this.loginChangeHandler} defaultValue={this.state.login} label="Логин" />
-                        <TextField autoFocus fullWidth margin="dense" onChange={this.passwordChangeHandler} defaultValue={this.state.password} type="password" label="Пароль" />
-                        <TextField autoFocus fullWidth margin="dense" onChange={this.passwordConfirmChangeHandler} defaultValue={this.state.passwordConfirm} type="password" label="Повторите пароль" />
+                        <TextField fullWidth margin="dense" onChange={this.passwordChangeHandler} defaultValue={this.state.password} type="password" label="Пароль" />
+                        <TextField fullWidth margin="dense" onChange={this.passwordConfirmChangeHandler} defaultValue={this.state.passwordConfirm} type="password" label="Повторите пароль" />
                     </DialogContent>
                     <DialogActions>
                         <Button color="primary" onClick={this.register}>Зарегестрироваться</Button>
