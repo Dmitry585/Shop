@@ -1,6 +1,7 @@
 ﻿import axios from 'axios';
 import { RezervationType, ProductType } from '../modelsTypes';
 import ProductItem from '../components/products-f/ProductItem';
+const FileDownload = require('js-file-download');
 
 
 export default {
@@ -22,4 +23,17 @@ export default {
             return null
         })
     },
+    async downloadPdf(): Promise<boolean | null> {
+
+        return axios({
+            url: "/api/rezervation/pdf",
+            method: 'GET',
+            responseType: 'blob',
+        }).then((res) => {
+            FileDownload(res.data, "orders.pdf")
+            return true
+        }).catch(() => {
+            return null
+        })
+    }
 }

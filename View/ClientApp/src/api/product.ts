@@ -1,5 +1,6 @@
 ﻿import axios from 'axios';
 import { ProductType } from '../modelsTypes';
+const FileDownload = require('js-file-download');
 
 
 export default {
@@ -30,5 +31,19 @@ export default {
         }).catch(() => {
             return null
         })
+    },
+    async downloadXlsx(): Promise<boolean | null> {
+
+        return axios({
+            url: "/api/product/xlsx",
+            method: 'GET',
+            responseType: 'blob',
+        }).then((res) => {
+            FileDownload(res.data, "products.xlsx")
+            return true
+        }).catch(() => {
+            return null
+        })
     }
+
 }

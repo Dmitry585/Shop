@@ -18,6 +18,12 @@ namespace EntityDatabase.Data.Repositories
             return result;
         }
 
+        public List<Product> GetAllProductsXlsx()
+        {
+            var result = StartCondition().Include(product => product.Type).ToList();
+            return result;
+        }
+
         public Product GetProductById(int id)
         {
             var result = base.StartCondition().FirstOrDefault(x => x.ProductId == id);

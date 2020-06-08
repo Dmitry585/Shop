@@ -1,6 +1,6 @@
 ﻿import * as React from "react";
 import { Column } from 'material-table';
-import { TextField } from '@material-ui/core';
+import { TextField,Button } from '@material-ui/core';
 import { ConnectedProps, connect } from "react-redux";
 import { ApplicationState } from "../../store/index";
 import { filteredProducts } from "../../store/products/selectors";
@@ -8,6 +8,7 @@ import { init, editProduct, deleteProduct, addProduct } from "../../store/produc
 import { ProductType, ModelType } from "../../modelsTypes";
 import CrudPage from "./CrudPage";
 import { productTypesForCombobox } from "../../store/productType/selectors";
+import product_api from "../../api/product";
 
 
 const mapStateToProps = (state: ApplicationState) => {
@@ -127,11 +128,16 @@ class CrudProducts extends React.PureComponent<CrudProductPropsType, { columns: 
         this.props.add(pr)
     }
 
+    public downloadXlsx = () => {
+        product_api.downloadXlsx();
+    }
+
 
 
     public render() {
         return (
             <div style={{ padding: 20 }}>
+                <Button onClick={this.downloadXlsx}>Выгрузить XLSX</Button>
                 <CrudPage title="Продукты" columns={this.state.columns} data={this.props.products} delete={this.delete} edit={this.edit} add={this.add} />
             </div>
         )

@@ -1,10 +1,12 @@
 ﻿import * as React from "react";
 import { ApplicationState } from "../../store";
+import { Button } from '@material-ui/core';
 import { connect, ConnectedProps } from "react-redux";
 import { OrderItemType, ModelType, RezervationType } from "../../modelsTypes";
 import MaterialTable, { Column, MaterialTableProps } from "material-table";
 import { rezervations } from "../../store/orders/selectors";
 import { getRezervation } from "../../store/orders/actions";
+import rezervation_api from "../../api/rezervation";
 
 const mapStateToProps = (state: ApplicationState) => {
     return {
@@ -51,9 +53,14 @@ class RezervedList extends React.PureComponent<RezerveListdPropsType, { columns:
         console.log(this.props.rezervations)
     }
 
+    public downloadPdf = () => {
+        rezervation_api.downloadPdf()
+    }
+
     public render() {
         return (
             <div style={{ padding: 20 }}>
+                <Button onClick={this.downloadPdf}>Выгрузить PDF</Button>
                 <MaterialTable
                     title="Список резервирования"
                     columns={this.state.columns}
